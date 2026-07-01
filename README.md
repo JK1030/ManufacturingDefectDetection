@@ -20,6 +20,7 @@ Predict manufacturing defects using machine learning models trained on productio
     Matplotlib
     Git
     GitHub
+    
 4. Project Structure
 ManufacturingDefectDetection/
     README.md

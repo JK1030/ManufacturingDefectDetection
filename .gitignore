@@ -13,3 +13,6 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+#Generated Synthetic Data 
+data/raw/*.csv
