@@ -22,18 +22,18 @@ def generate_synthetic_data(num_rows: int = 1000, random_seed: int = 42) -> pd.D
     np.random.seed(random_seed)
 
     data = {
-        "lot_id" : [f"LOT_{i:05d}" for i in range(1,num_rows + 1)],
-        "equipment_id" : np.random.choice(["EQP_A", "EQP_B", "EQP_C"], size=num_rows),
-        "recipe" : np.random.choice(["RCP_1", "RCP_2","RCP_3"], size=num_rows),
-        "temperature" : np.random.normal(loc=75, scale=5, size=num_rows),
-        "pressure" : np.random.normal(loc=30, scale=3, size=num_rows),
-        "process_time" : np.random.normal(loc=120, scale=15, size=num_rows)
+        "lot_id": [f"LOT_{i:05d}" for i in range(1, num_rows + 1)],
+        "equipment_id": np.random.choice(["EQP_A", "EQP_B", "EQP_C"], size=num_rows),
+        "recipe": np.random.choice(["RCP_1", "RCP_2","RCP_3"], size=num_rows),
+        "temperature": np.random.normal(loc=75, scale=5, size=num_rows),
+        "pressure": np.random.normal(loc=30, scale=3, size=num_rows),
+        "process_time": np.random.normal(loc=120, scale=15, size=num_rows)
     }
 
     df = pd.DataFrame(data)
 
-    #Simple defect rule:
-    #Defects are more likely when temperature or pressure is outside normal range.
+    # Simple defect rule:
+    # Defects are more likely when temperature or pressure is outside normal range.
     df["defect"] = (
         (df["temperature"] > 82)
         | (df["temperature"] < 68)
@@ -47,20 +47,20 @@ def generate_synthetic_data(num_rows: int = 1000, random_seed: int = 42) -> pd.D
 def inject_data_quality_issues(
         df: pd.DataFrame,
         missing_rate: float = 0.02,
-        outliner_rate: float = 0.01,
+        outlier_rate: float = 0.01,
         random_seed: int = 42
 ) -> pd.DataFrame:
     '''
-    Inject missing values and outliners into the synthetic dataset. 
+    Inject missing values and outliers into the synthetic dataset. 
 
     Args:
         df: Clean synthetic manufacturing DataFrame. 
         missing_rate: Percentage of rows to receive missing values.
-        outliner_rate: Percentage of raws to recive outliner values.
+        outlier_rate: Percentage of rows to receive outlier values.
         random_seed: Random seed for reproducibility
 
     Returns:
-        DataFrame with injected data quality inssues.
+        DataFrame with injected data quality issues.
     '''
     np.random.seed(random_seed)
 
@@ -69,7 +69,7 @@ def inject_data_quality_issues(
 
     numeric_columns = ["temperature", "pressure", "process_time"]
 
-    #Inject missing values
+    # Inject missing values
     for column in numeric_columns:
         missing_indices = np.random.choice(
             df.index,
@@ -79,16 +79,16 @@ def inject_data_quality_issues(
 
         df.loc[missing_indices, column] = np.nan
 
-    #Inject outliners
-    outliner_dices = np.random.choice(
+    # Inject outliers
+    outlier_indices = np.random.choice(
         df.index,
-        size=int(num_rows * outliner_rate),
+        size=int(num_rows * outlier_rate),
         replace=False
     )
 
-    df.loc[outliner_dices, "temperature"] = np.random.choice([20, 150], size=len(outliner_dices))
-    df.loc[outliner_dices, "pressure"] = np.random.choice([1, 100], size=len(outliner_dices))
-    df.loc[outliner_dices, "process_time"] = np.random.choice([-10, 500], size=len(outliner_dices))
+    df.loc[outlier_indices, "temperature"] = np.random.choice([20, 150], size=len(outlier_indices))
+    df.loc[outlier_indices, "pressure"] = np.random.choice([1, 100], size=len(outlier_indices))
+    df.loc[outlier_indices, "process_time"] = np.random.choice([-10, 500], size=len(outlier_indices))
 
     return df
 
@@ -96,9 +96,9 @@ def save_data(df: pd.DataFrame, output_path: str) -> None:
     '''
     Save DataFrame to a CSV file.
 
-    Arg: 
+    Args: 
         df: DataFrame to save.
-        output_path: Target CVS file path.
+        output_path: Target CSV file path.
     '''
 
     path = Path(output_path)
@@ -109,8 +109,8 @@ def save_data(df: pd.DataFrame, output_path: str) -> None:
 def main() -> None:
     output_path = "data/raw/synthetic_manufacturing_data.csv"
 
-    df = generate_synthetic_data(num_rows= 1000, random_seed=42)
-    df = inject_data_quality_issues(df, missing_rate=0.02, outliner_rate=0.01, random_seed=42)
+    df = generate_synthetic_data(num_rows=1000, random_seed=42)
+    df = inject_data_quality_issues(df, missing_rate=0.02, outlier_rate=0.01, random_seed=42)
 
     save_data(df, output_path)
 
@@ -120,6 +120,6 @@ def main() -> None:
     print(f"Defect rate: {df['defect'].mean(): .2%}")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
 
