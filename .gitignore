@@ -16,3 +16,4 @@ __pycache__/
 
 #Generated Synthetic Data 
 data/raw/*.csv
+data/processed/*.csv

@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 def generate_synthetic_data(num_rows: int = 1000, random_seed: int = 42) -> pd.DataFrame:
-    '''
+    """
     Generate synthetic manufacturing process data.
 
     Args:
@@ -17,7 +17,7 @@ def generate_synthetic_data(num_rows: int = 1000, random_seed: int = 42) -> pd.D
 
     Returns:
         A pandas DataFrame containing synthetic manufacturing data. 
-    '''
+    """
 
     np.random.seed(random_seed)
 
@@ -50,7 +50,7 @@ def inject_data_quality_issues(
         outlier_rate: float = 0.01,
         random_seed: int = 42
 ) -> pd.DataFrame:
-    '''
+    """
     Inject missing values and outliers into the synthetic dataset. 
 
     Args:
@@ -61,7 +61,7 @@ def inject_data_quality_issues(
 
     Returns:
         DataFrame with injected data quality issues.
-    '''
+    """
     np.random.seed(random_seed)
 
     df = df.copy()
@@ -93,13 +93,13 @@ def inject_data_quality_issues(
     return df
 
 def save_data(df: pd.DataFrame, output_path: str) -> None:
-    '''
+    """
     Save DataFrame to a CSV file.
 
     Args: 
         df: DataFrame to save.
         output_path: Target CSV file path.
-    '''
+    """
 
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
