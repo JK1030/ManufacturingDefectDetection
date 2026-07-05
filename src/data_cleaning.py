@@ -14,7 +14,6 @@ Main tasks include:
 The cleaned dataset is stored in the processed data directory
 and will be used for feature engineering and model training. 
 """
-
 from pathlib import Path
 import pandas as pd
 
@@ -101,7 +100,7 @@ def fix_invalid_values(df: pd.DataFrame) -> pd.DataFrame:
         invalid_mask = (
             (df[column] < min_value) |
             (df[column] > max_value)
-        )
+        )  
 
         invalid_count = invalid_mask.sum()
         print(f"{column}: {invalid_count} invalid values" )
@@ -156,7 +155,7 @@ def save_data(df: pd.DataFrame, output_path: str) -> None:
 
 def main() -> None:
     input_file = "data/raw/synthetic_manufacturing_data.csv"
-    output_path = "data/processed/synthetic_manufacturing_data.csv"
+    output_path = "data/processed/cleaned_synthetic_manufacturing_data.csv"
 
     df = load_data(input_file)
     df = check_duplicates(df)
