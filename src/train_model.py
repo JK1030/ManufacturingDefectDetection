@@ -21,7 +21,7 @@ def load_data(input_file: str) -> pd.DataFrame:
     return pd.read_csv(input_file)
 
 def split_features_target(
-        df: pd.DataFrame, target_column:str
+        df: pd.DataFrame, target_column: str
 ) -> tuple[pd.DataFrame, pd.Series]:
     """
     Split dataframe into features and targets.
@@ -33,7 +33,7 @@ def split_features_target(
 
 def split_train_test(
     X: pd.DataFrame,
-    y: pd. Series,
+    y: pd.Series,
     test_size: float = 0.2,
     random_state: int = 42,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
@@ -101,6 +101,8 @@ def main() -> None:
     X_train, X_test, y_train, y_test = split_train_test(X,y)
 
     model = train_model(X_train, y_train)
+
+    save_model(model, output_model_file)
 
     show_feature_importance(model, X.columns.tolist())
 
