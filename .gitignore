@@ -21,3 +21,6 @@ data/featured/*.csv
 
 # Trained models
 models/*.pkl
+
+# Prediction results
+reports/*.csv
