@@ -17,17 +17,34 @@ def load_data(input_path: str) -> pd.DataFrame:
     """
     return pd.read_csv(input_path)
 
+def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Remove non-feature columns for prediction. 
+    """
+    X = df.drop(columns=["defect", "lot_id"])
+    return X
+
+
 def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     """
     Apply the same preprocessing used during training.
-    """
+
     # TODO: resuse data_cleaning + feature_engineering logic
+    ######
+    df = clean_data(df)          # data_cleaning.py
+    df = engineer_features(df)   # feature_engineering.py
+
+    return df
+    #######
+    """
     return df
 
-def make_prediction(model, X:pd.DataFrame) -> pd.DataFrame:
+def make_prediction(model, df:pd.DataFrame) -> pd.DataFrame:
     """
     Generate defect predictions.
     """
+    X = prepare_features(df)
+
     predictions = model.predict(X)
 
     result_df = X.copy()
@@ -49,8 +66,8 @@ def main() -> None:
 
     model = load_model(model_path)
     df = load_data(input_path)
-    X = df.drop(columns=["defect", "lot_id"])
-    result_df = make_prediction(model, X)
+
+    result_df = make_prediction(model, df)
 
     save_prediction(result_df, output_path)
 
