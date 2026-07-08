@@ -21,7 +21,10 @@ def prepare_features(df: pd.DataFrame) -> pd.DataFrame:
     """
     Remove non-feature columns for prediction. 
     """
-    X = df.drop(columns=["defect", "lot_id"])
+    X = df.drop(
+        columns=["defect", "lot_id"],
+        errors="ignore"
+        )
     return X
 
 
@@ -57,7 +60,6 @@ def save_prediction(result_df: pd.DataFrame, output_path: str) -> None:
     Save prediction results to CSV,
     """
     result_df.to_csv(output_path, index=False)
-
 
 def main() -> None:
     model_path = "models/gradient_boosting_model.pkl"

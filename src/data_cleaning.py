@@ -153,15 +153,24 @@ def save_data(df: pd.DataFrame, output_path: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(path, index=False)
 
+def cleaned_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Apply the complete data cleaning pipeline.
+    """
+
+    df = check_duplicates(df)
+    df = convert_data_types(df)
+    df = fix_invalid_values(df)
+    df = handle_missing_values(df)
+
+    return df
+
 def main() -> None:
     input_file = "data/raw/synthetic_manufacturing_data.csv"
     output_path = "data/processed/cleaned_synthetic_manufacturing_data.csv"
 
     df = load_data(input_file)
-    df = check_duplicates(df)
-    df = convert_data_types(df)
-    df = fix_invalid_values(df)
-    df = handle_missing_values(df)
+    df = cleaned_data(df)
     save_data(df, output_path)
     
 if __name__ == "__main__":

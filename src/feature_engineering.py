@@ -116,17 +116,21 @@ def save_data(df: pd.DataFrame, output_path: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(path, index=False)
 
+def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
+
+    df = create_interaction_features(df)
+    df = create_ratio_features(df)
+    df = create_risk_flags(df)
+    df = encode_categorical_features(df)
+
+    return df
 
 def main() -> None:
     input_file = "data/processed/cleaned_synthetic_manufacturing_data.csv"
     output_path = "data/featured/featured_synthetic_manufacturing_data.csv"
 
     df = load_data(input_file)
-    df = create_interaction_features(df)
-    df = create_ratio_features(df)
-    df = create_risk_flags(df)
-    df = encode_categorical_features(df)
-
+    df = engineer_features(df)
     save_data(df, output_path)
 
 if __name__ == "__main__":

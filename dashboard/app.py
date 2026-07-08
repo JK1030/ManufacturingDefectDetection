@@ -13,6 +13,8 @@ sys.path.append(str(BASE_DIR))
 
 from src.predict import load_model
 from src.predict import make_prediction
+from src.data_cleaning import cleaned_data
+from src.feature_engineering import engineer_features
 
 def highlight_defect(row):
     """
@@ -142,6 +144,37 @@ def download_results(result_df: pd.DataFrame) -> None:
         mime="text/cvs"
     )
 
+def validate_uploaded_file(df: pd.DataFrame) -> bool:
+    """
+    Validate whether the uploaded CSV file has the required columns. 
+
+    Args:
+        df: pd.DataFrame
+            Uploaded dataframe. 
+        required_columns: list[str]
+            Columns required for prediction.
+    Returns:
+        bool: True if the uploaded dataframe is valid, otherwise False. 
+    """
+    required_columns = [
+        "temperature",
+        "pressure",
+        "process_time",
+        "equipment_id",
+        "recipe",
+    ]    
+
+    if df.empty:
+        st.error("Uploaded CSV file is empty.")
+        return False
+    missing_columns = [col for col in required_columns if col not in df.columns]
+
+    if missing_columns:
+        st.error(f"Uploaded CSV is missing required columns: {missing_columns}")
+        return False
+    
+    return True
+
 def main() -> None:
     """
     Run the Streamlit dashboard fir manufacturing defect prediction. 
@@ -162,6 +195,12 @@ def main() -> None:
 
     if upload_file is not None:
         df = pd.read_csv(upload_file)
+
+        if not validate_uploaded_file(df):
+            st.stop()
+
+        df = cleaned_data(df)
+        df = engineer_features(df)
 
         st.subheader("Uploaded Data")
         st.dataframe(df.head())
