@@ -95,15 +95,29 @@ This project demonstrates a complete defect detection workflow by:
 7. Predict defects on unseen data
 8. Visualize prediction results
 
+## Model Performance (Synthetic Dataset)
+```text
+┌──────────────┬────────────┐
+|    Metric    |    Score   |
+|──────────────|────────────|
+| Accuracy     | 1.0000     |
+| Precision    | 1.0000     |
+| Recall       | 1.0000     |
+| F1-score     | 1.0000     |
+└──────────────┴────────────┘
+```
+
 ## Model Performance
-
-| Metric    |   Score  |
-|-----------|----------|
-| Accuracy  |  1.0000  |
-| Precision |  1.0000  |
-| Recall    |  1.0000  |
-| F1-score  |  1.0000  |
-
+```text
+┌───────────────────────┬─────────────────────────┐
+|         Metric        |          Result         |
+|───────────────────────|─────────────────────────|
+| Test records          |  187                    |
+| Total inference time  |  2.31 ms                |
+| Average latency       |  0.0124 ms/record       |
+| Throughput            |  80,972 records/second  |
+└───────────────────────┴─────────────────────────┘
+```
 > **Note:** The synthetic dataset uses deterministic rule-based defect generation. 
 > Therefore, near-perfect performance is expected and primarily demonstrates the 
 > end-to-end  machine learning workflow rather than real-world predictive performance.
@@ -124,8 +138,9 @@ The Streamlit dashboard provides:
 - Download prediction results as CSV
 
 ## Tech Stack
-    |   Category      |           Technologies           |
-    |-----------------|----------------------------------|
+    ┌─────────────────┬──────────────────────────────────┐
+    │   Category      |           Technologies           |
+    |─────────────────|──────────────────────────────────|
     |   Language      |             Python 3.11          |
     |   Backend       |              FastAPI             |
     |       ML        |  Scikit-learn, Gradient Boosting |
@@ -133,9 +148,9 @@ The Streamlit dashboard provides:
     |   Frontend      |          Streamlit, Plotly       |
     |      DevOps     |        Docker, Docker Compose    |
     | Version Control |             Git, GitHub          |
-
+    └─────────────────┴──────────────────────────────────┘
 ## Project Structure
-
+```text
     ManufacturingDefectDetection/
     │
     ├── dashboard/
@@ -171,7 +186,7 @@ The Streamlit dashboard provides:
     ├── requirements.txt
     ├── README.md
     └── .gitignore
-
+```
 
 ## Installation
 ### Clone the repository

@@ -7,6 +7,7 @@ performance using common classification metrics.
 """
 import joblib
 import pandas as pd
+import time
 
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import train_test_split
@@ -114,12 +115,29 @@ def main() -> None:
 
     model = load_model(model_file)
 
+    start_time = time.perf_counter()
+
     y_pred = make_prediction(model, X_test)
+
+    end_time = time.perf_counter()
+
+    inference_time = end_time - start_time
+    avg_latency_ms = (inference_time / len(X_test)) * 1000
+    throughput = len(X_test) / inference_time
+
 
     print("Accuracy:", accuracy_score(y_test, y_pred))
     print("Precision:", precision_score(y_test, y_pred))
     print("Recall:", recall_score(y_test, y_pred))
     print("F1 Score:", f1_score(y_test, y_pred))
+
+    print("\nInference Performance:")
+    print(f"Test records: {len(X_test)}")
+    print(f"Total inference time: {inference_time:.6f} seconds")
+    print(f"Average latency: {avg_latency_ms:.6f} ms/record")
+    print(f"Throughput: {throughput:.2f} records/second")
+
+
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
     print("\nConfusion Matrix:")
