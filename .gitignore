@@ -1,26 +1,23 @@
 # Virtual Environment
 .venv/
 
-# Python cache
+# Python
 __pycache__/
 *.pyc
 
-# VS Code
+# VSCode
 .vscode/
 
-# Jupyter Notebook
+# Jupyter
 .ipynb_checkpoints/
 
 # macOS
 .DS_Store
 
-#Generated Synthetic Data 
+# Generated data
 data/raw/*.csv
 data/processed/*.csv
 data/featured/*.csv
 
-# Trained models
-models/*.pkl
-
-# Prediction results
+# Prediction output
 reports/*.csv
