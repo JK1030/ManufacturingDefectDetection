@@ -4,18 +4,21 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B)
 ![Plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75)
 
-````markdown
 # Manufacturing Defect Detection
 
-This project focuses on building an end-to-end production-style machine learning system rather than training a standalone model.
+This project focuses on building an end-to-end production-style machine learning system 
+rather than training a standalone model.
 
-This project simulates a real-world industrial AI workflow, starting from raw manufacturing data and ending with an interactive prediction dashboard. The focus is not only on building a machine learning model, but also on designing a maintainable, modular, and production-like data pipeline.
+This project simulates a real-world industrial AI workflow, starting from raw manufacturing 
+data and ending with an interactive prediction dashboard. The focus is not only on building 
+a machine learning model, but also on designing a maintainable, modular, and 
+production-like data pipeline.
 
----
-````markdown
-# Project Overview
+## Project Overview
 
-Manufacturing facilities continuously generate large amounts of process data from equipment and production lines. Identifying defective products early can reduce production costs, improve product quality, and minimize downtime.
+Manufacturing facilities continuously generate large amounts of process data from 
+equipment and production lines. Identifying defective products early can reduce 
+production costs, improve product quality, and minimize downtime.
 
 This project demonstrates a complete defect detection workflow by:
 
@@ -26,9 +29,9 @@ This project demonstrates a complete defect detection workflow by:
 - Serving predictions through a FastAPI backend
 - Visualizing prediction results in an interactive Streamlit dashboard
 
----
-````markdown
-# Features
+
+
+## Features
 
 - Generate synthetic manufacturing datasets
 - Automated data cleaning pipeline
@@ -45,48 +48,43 @@ This project demonstrates a complete defect detection workflow by:
 - Friendly error handling
 - Modular and reusable project structure
 
----
-````markdown
-# Project Architecture
-
+## Project Architecture
 ```text
-        User
-         │
-         ▼
-+-------------------+
-| Streamlit(Docker) |
-+-------------------+
-         │
-   HTTP POST
-         │
-         ▼
-+-------------------+
-|  FastAPI(Docker)  |
-+-------------------+
-         │
-         ▼
-+------------------+
-| Data Pipeline    |
-| - Validation     |
-| - Cleaning       |
-| - Feature Eng.   |
-+------------------+
-         │
-         ▼
-+------------------+
-| Gradient Boosting|
-+------------------+
-         │
-         ▼
- Prediction Results
-         │
-         ▼
-    Streamlit UI
+            End User
+                │
+                ▼
+        +-------------------+
+        | Streamlit(Docker) |
+        +-------------------+
+                │
+            HTTP POST
+                │
+                ▼
+        +-------------------+
+        |  FastAPI(Docker)  |
+        +-------------------+
+                │
+                ▼
+        +------------------+
+        | Data Pipeline    |
+        | - Validation     |
+        | - Cleaning       |
+        | - Feature Eng.   |
+        +------------------+
+                │
+                ▼
+        +------------------+
+        | Gradient Boosting|
+        +------------------+
+                │
+                ▼
+        Prediction Results
+                │
+                ▼
+            Streamlit UI
 ```
 
----
-````markdown
-# Machine Learning Pipeline
+## Machine Learning Pipeline
 
 1. Generate synthetic manufacturing data
 2. Clean invalid and missing values
@@ -97,9 +95,7 @@ This project demonstrates a complete defect detection workflow by:
 7. Predict defects on unseen data
 8. Visualize prediction results
 
----
-````markdown
-# Model Performance
+## Model Performance
 
 | Metric    |   Score  |
 |-----------|----------|
@@ -108,11 +104,11 @@ This project demonstrates a complete defect detection workflow by:
 | Recall    |  1.0000  |
 | F1-score  |  1.0000  |
 
-> **Note:** The synthetic dataset uses deterministic rule-based defect generation. Therefore, near-perfect performance is expected and primarily demonstrates the end-to-end machine learning workflow rather than real-world predictive performance.
+> **Note:** The synthetic dataset uses deterministic rule-based defect generation. 
+> Therefore, near-perfect performance is expected and primarily demonstrates the 
+> end-to-end  machine learning workflow rather than real-world predictive performance.
 
----
-````markdown
-# Dashboard Features
+## Dashboard Features
 
 The Streamlit dashboard provides:
 
@@ -127,177 +123,143 @@ The Streamlit dashboard provides:
 - Highlighted defect rows
 - Download prediction results as CSV
 
----
-````markdown
-# Tech Stack
+## Tech Stack
+    |   Category      |           Technologies           |
+    |-----------------|----------------------------------|
+    |   Language      |             Python 3.11          |
+    |   Backend       |              FastAPI             |
+    |       ML        |  Scikit-learn, Gradient Boosting |
+    |      Data       |            Pandas, NumPy         |
+    |   Frontend      |          Streamlit, Plotly       |
+    |      DevOps     |        Docker, Docker Compose    |
+    | Version Control |             Git, GitHub          |
 
-### Programming Language
+## Project Structure
 
-- Python 3.11
+    ManufacturingDefectDetection/
+    │
+    ├── dashboard/
+    │   └── app.py                     # Streamlit dashboard
+    │
+    ├── data/
+    │   ├── raw/                       # Raw manufacturing data
+    │   └── processed/                 # Cleaned datasets
+    │
+    ├── images/                        # README screenshots
+    │
+    ├── models/
+    │   ├── gradient_boosting_model.pkl
+    │   └── feature_columns.pkl
+    │
+    ├── notebooks/                     # Experiments and EDA
+    │
+    ├── reports/                       # Evaluation reports
+    │
+    ├── src/
+    │   ├── api.py                     # FastAPI inference service
+    │   ├── data_generator.py          # Synthetic data generation
+    │   ├── data_cleaning.py           # Data preprocessing
+    │   ├── feature_engineering.py     # Feature engineering
+    │   ├── train_model.py             # Model training
+    │   ├── evaluate_model.py          # Model evaluation
+    │   └── predict.py                 # Prediction utilities
+    │
+    ├── Dockerfile.api                 # FastAPI Docker image
+    ├── Dockerfile.streamlit           # Streamlit Docker image
+    ├── docker-compose.yml             # Multi-container configuration
+    │
+    ├── requirements.txt
+    ├── README.md
+    └── .gitignore
 
-### Backend
 
-- FastAPI
-
-### Machine Learning
-
-- Scikit-learn
-- Gradient Boosting Classifier
-
-### Data Processing
-
-- Pandas
-- NumPy
-
-### Frontend & Visualization
-
-- Streamlit
-- Plotly
-
-### Development Tools
-
-- Git
-- GitHub
----
-````markdown
-# Project Structure
-
-```text
-ManufacturingDefectDetection/
-│
-
-│
-├── dashboard/
-│   └── app.py                 # Streamlit dashboard
-│
-├── data/
-│   ├── raw/                   # Raw manufacturing data
-│   └── processed/             # Processed datasets
-│
-├── models/
-│   ├── gradient_boosting_model.pkl
-│   └── feature_columns.pkl
-│
-├── notebooks/                 # Experimentation and EDA
-│
-├── reports/                   # Figures and evaluation reports
-│
-├── src/
-│   ├── data_generator.py      # Generate synthetic manufacturing data
-│   ├── data_cleaning.py       # Data validation and cleaning
-│   ├── feature_engineering.py # Feature engineering pipeline
-│   ├── train_model.py         # Model training
-│   ├── evaluate_model.py      # Model evaluation
-│   ├── predict.py              # Prediction utilities
-    └── api.py                 # FastAPI backend for model inference
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
----
-
-# Installation
-
-Clone the repository
-
+## Installation
+### Clone the repository
 ```bash
 git clone https://github.com/JK1030/ManufacturingDefectDetection.git
 ```
 
-Move into the project
-
+### Move into the project
 ```bash
 cd ManufacturingDefectDetection
 ```
 
-Create a virtual environment
-
+### Create a virtual environment
 ```bash
 python -m venv .venv
 ```
 
-Activate the virtual environment
-
-Windows
-
+### Activate the virtual environment
+#### Windows
 ```bash
 .venv\Scripts\activate
 ```
 
-Install dependencies
-
+#### Install dependencies
+The repository already includes the trained model in the models/ directory.
+No additional training is required.
 ```bash
 pip install -r requirements.txt
 ```
 
----
-````markdown
-# Running the Project
-## Local Execution
-
+## Running the Project
+### Local Execution
 Launch the Streamlit dashboard locally.
-
 ```bash
 streamlit run dashboard/app.py
 ```
 
-## Docker Execution
-
+### Docker Execution
 Build the Docker images and start all services.
-
 ```bash
 docker compose up --build
 ```
-## Stop the Services
 
+### Stop Docker Services
 ```bash
 docker compose down
 ```
 
-The application will be available at:
+    The application will be available at:
+        - **Streamlit Dashboard:** http://localhost:8501
+        - **FastAPI:** http://localhost:8000
+        - **FastAPI Docs (Swagger):** http://localhost:8000/docs
 
-- **Streamlit Dashboard:** http://localhost:8501
-- **FastAPI:** http://localhost:8000
-- **FastAPI Docs (Swagger):** http://localhost:8000/docs
+    Upload a raw manufacturing CSV file and the application will automatically:
+        - Validate the CSV
+        - Clean the data
+        - Generate engineered features
+        - Load the trained model
+        - Predict manufacturing defects
+        - Display interactive visualizations
+        - Allow downloading prediction results
 
+## Dashboard Preview
 
-Upload a raw manufacturing CSV file and the application will automatically:
+### Dashboard
+![Upload](images/dashboards.png)
 
-- Validate the CSV
-- Clean the data
-- Generate engineered features
-- Load the trained model
-- Predict manufacturing defects
-- Display interactive visualizations
-- Allow downloading prediction results
+#### Upload CSV
+![Upload](images/csv_uploads.png)
 
----
-````markdown
-# Dashboard Preview
+#### Prediction Results
+![Prediction](images/prediction_results.png)
 
-*Dashboard screenshots will be added after deployment.*
+## Future Improvements
 
----
-````markdown
-# Future Improvements
-
-- Docker containerization
-- Cloud deployment (Render, AWS, or Azure)
-- Model monitoring and logging
+- Deploy on AWS EC2
+- CI/CD with GitHub Actions
 - SHAP model explainability
-- Hyperparameter optimization
-- Compare additional ML models (XGBoost, LightGBM)
-- CI/CD pipeline with GitHub Actions
+- XGBoost / LightGBM comparison
+- Model monitoring and logging
 - Real-time prediction API
 
-
-End-to-end Machine Learning pipeline for manufacturing defect prediction with automated preprocessing, Gradient Boosting inference, and an interactive Streamlit dashboard.
----
-````markdown
-# Author
+## Author
 
 **Jenny Jinmyeong Kim**
 
 Industrial AI | Machine Learning | Manufacturing Analytics | Data Engineering
 
 GitHub: https://github.com/JK1030/ManufacturingDefectDetection
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900?logo=amazonaws&logoColor=white)
