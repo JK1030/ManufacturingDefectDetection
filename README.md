@@ -53,16 +53,16 @@ This project demonstrates a complete defect detection workflow by:
         User
          │
          ▼
-+------------------+
-|    Streamlit     |
-+------------------+
++-------------------+
+| Streamlit(Docker) |
++-------------------+
          │
    HTTP POST
          │
          ▼
-+------------------+
-|     FastAPI      |
-+------------------+
++-------------------+
+|  FastAPI(Docker)  |
++-------------------+
          │
          ▼
 +------------------+
@@ -233,12 +233,33 @@ pip install -r requirements.txt
 ---
 ````markdown
 # Running the Project
+## Local Execution
 
-Launch the Streamlit dashboard
+Launch the Streamlit dashboard locally.
 
 ```bash
 streamlit run dashboard/app.py
 ```
+
+## Docker Execution
+
+Build the Docker images and start all services.
+
+```bash
+docker compose up --build
+```
+## Stop the Services
+
+```bash
+docker compose down
+```
+
+The application will be available at:
+
+- **Streamlit Dashboard:** http://localhost:8501
+- **FastAPI:** http://localhost:8000
+- **FastAPI Docs (Swagger):** http://localhost:8000/docs
+
 
 Upload a raw manufacturing CSV file and the application will automatically:
 
