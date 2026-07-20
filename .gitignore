@@ -21,3 +21,6 @@ data/featured/*.csv
 
 # Prediction output
 reports/*.csv
+
+# aws pemkey
+*.pem
