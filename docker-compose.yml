@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile.api
     ports:
       - "8000:8000"
+    restart: unless-stopped
 
   streamlit:
     build:
@@ -12,6 +13,7 @@ services:
       dockerfile: Dockerfile.streamlit
     ports:
       - "8501:8501"
+    restart: unless-stopped
     environment:
       API_BASE_URL: http://api:8000
     depends_on:
