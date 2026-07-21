@@ -1,8 +1,12 @@
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B)
 ![Plotly](https://img.shields.io/badge/Plotly-Visualization-3F4F75)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-EC2%20Deployment-FF9900?logo=amazonaws&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?logo=githubactions&logoColor=white)
 
 # Manufacturing Defect Detection
 
@@ -43,7 +47,7 @@ This project demonstrates a complete defect detection workflow by:
 - Automatic prediction
 - KPI summary cards
 - Interactive Plotly visualizations
-- Prediction result download
+- Download prediction results
 - CSV validation
 - Friendly error handling
 - Modular and reusable project structure
@@ -86,7 +90,7 @@ This project demonstrates a complete defect detection workflow by:
 
 ## Machine Learning Pipeline
 
-1. Generate synthetic manufacturing data
+1. Generate synthetic manufacturing dataset
 2. Clean invalid and missing values
 3. Create engineered features
 4. Train Gradient Boosting classifier
@@ -120,7 +124,7 @@ This project demonstrates a complete defect detection workflow by:
 ```
 > **Note:** The synthetic dataset uses deterministic rule-based defect generation. 
 > Therefore, near-perfect performance is expected and primarily demonstrates the 
-> end-to-end  machine learning workflow rather than real-world predictive performance.
+> end-to-end machine learning workflow rather than real-world predictive performance.
 
 ## Dashboard Features
 
@@ -143,7 +147,7 @@ The Streamlit dashboard provides:
     |─────────────────|──────────────────────────────────|
     |   Language      |             Python 3.11          |
     |   Backend       |              FastAPI             |
-    |       ML        |  Scikit-learn, Gradient Boosting |
+    | MachineLearning |  Scikit-learn, Gradient Boosting |
     |      Data       |            Pandas, NumPy         |
     |   Frontend      |          Streamlit, Plotly       |
     |      DevOps     |        Docker, Docker Compose    |
@@ -219,7 +223,14 @@ pip install -r requirements.txt
 
 ## Running the Project
 ### Local Execution
-Launch the Streamlit dashboard locally.
+Launch the FastAPI and Streamlit dashboard locally.
+
+#### Terminal 1
+```bash
+uvicorn src.api:app --reload
+```
+
+#### Terminal 2
 ```bash
 streamlit run dashboard/app.py
 ```
@@ -261,13 +272,41 @@ docker compose down
 ![Prediction](images/prediction_results.png)
 
 ## Future Improvements
+- SHAP explainability
+- XGBoost / LightGBM
+- Authentication
+- Model monitoring
+- Real-time prediction
+- Cloud storage
+- Model retraining pipeline
 
-- Deploy on AWS EC2
-- CI/CD with GitHub Actions
-- SHAP model explainability
-- XGBoost / LightGBM comparison
-- Model monitoring and logging
-- Real-time prediction API
+## AWS Deployment
+
+This project can be deployed on AWS EC2 using Docker Compose.
+
+1. Launch an EC2 instance
+2. Install Docker & Docker Compose
+3. Clone the repository
+4. Run
+
+```bash
+docker compose up -d --build
+```
+
+5. Access
+
+http://<EC2-IP>:8501
+
+## CI Pipeline
+
+This project uses GitHub Actions.
+
+On every push to the main branch:
+
+- Install dependencies
+- Run unit checks
+- Validate project build
+
 
 ## Author
 
@@ -275,6 +314,6 @@ docker compose down
 
 Industrial AI | Machine Learning | Manufacturing Analytics | Data Engineering
 
-GitHub: https://github.com/JK1030/ManufacturingDefectDetection
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-Deployed-FF9900?logo=amazonaws&logoColor=white)
+GitHub Repository: https://github.com/JK1030/ManufacturingDefectDetection
+
+Production-ready end-to-end machine learning pipeline for manufacturing defect detection.
